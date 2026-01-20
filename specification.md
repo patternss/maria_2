@@ -92,11 +92,17 @@ Core loop (MVP): a user adds a concept → the assistant generates questions →
 ### Grading thresholds
 - Correct: score ≥ 85%
 - Poor: score < 50%
-- Partial: 50–85%
+- OK: 50–85%
+
+Feedback thresholds (independent of correctness):
+- If score < 50%: provide a hint.
+- If score is 50–90%: provide model answer + improvement pointers.
+- If score ≥ 90%: keep feedback brief.
 
 Notes:
 - “Correct” (≥85%) updates `last_correct_at`.
-- “Partial” uses model answer feedback; “Poor” uses model answer feedback.
+- OK/Partial answers typically use model answer feedback.
+- Poor answers use hint feedback.
 
 
 ### Mastery and cooldown
@@ -125,6 +131,12 @@ Formula:
 Hard cooldown:
 - A concept is due if `now >= next_due_at` (or `next_due_at` is missing).
 - No “exception probability” for selecting cooled-down concepts in MVP (0%).
+- If no concepts are due, practice generation is blocked until the next concept becomes due.
+
+When `next_due_at` is updated:
+- If score ≥ 85%: set `next_due_at = now + cooldown_minutes`.
+- If score < 50%: set `next_due_at = now + 10 minutes`.
+- If score is 50–85%: do not update `next_due_at` (selection weighting should bring the concept back relatively soon).
 
 Poor-answer minimum cooldown:
 - If score < 50%, set `next_due_at = now + 10 minutes`.
@@ -155,6 +167,11 @@ Proposed weights (tunable; may be adjusted later based on testing):
 ### Bank rules
 - Bank scope: per concept.
 - Bank cap: 10 questions per concept.
+
+Question data stored per bank entry (MVP):
+- `question_text`
+- `model_answer`
+- `rubric/criteria` (short)
 
 Generate vs draw:
 - If bank size is 0: generate.

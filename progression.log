@@ -1,0 +1,15 @@
+FORMAT: YYYY-MM-DD HH:MM:SS (local time)
+
+2026-01-20 00:00:00: Finalized MVP spec knobs: OK answers (50–85%) do not update next_due_at; question bank stores model_answer + rubric. Added guidelines pointer file.
+2026-01-20 00:00:00: Scaffolded Python backend (FastAPI) with /health and concepts CRUD (create/list/get) backed by YAML + atomic writes; added initial HTTP API docs. Frontend scaffolding blocked because npm/Node is not available in this environment.
+2026-01-20 00:00:00: Implemented practice loop backend (YAML progress/question bank/attempts/reports, selection+mastery scheduling, Ollama client) and added endpoints: POST /practice/generate, POST /practice/submit, POST /questions/{id}/report with API docs.
+2026-01-20 00:00:00: Wired tag continuity into /practice/generate via last 3 attempts; report endpoint now removes and best-effort replaces confirmed-poor questions.
+2026-01-20 00:00:00: Added API docs for practice/report endpoints and internal docs for scheduling/selection/Ollama/practice service; updated backend README.
+
+2026-01-20 16:10:03: Added progress read endpoints (GET /progress, GET /concepts/{id}/progress), wired router, and documented the endpoints.
+
+2026-01-20 16:16:44: Fixed repository dependency caching (Settings was unhashable with lru_cache), added async smoke test script, and verified core endpoints via in-process smoke test.
+
+2026-01-20 16:18:30: Added pytest unit tests for scheduling/selection logic and verified they pass (9 passed).
+
+2026-01-20 16:24:46: Added a timestamped next-steps checklist in next_steps.md for restart continuity.

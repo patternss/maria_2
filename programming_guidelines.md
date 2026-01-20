@@ -77,6 +77,10 @@ In this project, “API” includes:
 	- Tradeoffs
 	- How to change it later (parameters / files)
 
+### Progress logging
+- Log meaningful milestones to `progression.log`.
+- Timestamp format: `YYYY-MM-DD HH:MM:SS` (local time).
+
 ### Testing & quality (guiding principles)
 - Write tests for the highest-risk logic first:
 	- YAML read/write and atomic saves

@@ -16,3 +16,9 @@ This folder is for documenting *non-HTTP* APIs: important modules/classes/functi
 - Keep docs short and focused.
 - Link to the code module path once it exists.
 - Include inputs/outputs, invariants, side effects, and examples.
+
+## Current files
+- `scheduling.md`
+- `selection.md`
+- `ollama_client.md`
+- `practice_service.md`
